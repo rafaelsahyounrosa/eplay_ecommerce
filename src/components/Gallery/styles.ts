@@ -21,6 +21,7 @@ export const Action = styled.div`
 `
 export const Item = styled.li`
   position: relative;
+  cursor: zoom-in;
 
   > img {
     border: 2px solid ${cores.branca};
@@ -71,6 +72,12 @@ export const ModalContent = styled.div`
     display: flex;
     margin-bottom: 24px;
     justify-content: space-between;
+
+    img {
+      width: 16px;
+      cursor: pointer;
+      height: 16px;
+    }
   }
 
   h4 {

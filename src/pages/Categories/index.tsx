@@ -9,13 +9,18 @@ import {
   useGetSimulationGamesQuery,
   useGetSportGamesQuery
 } from '../../services/api'
+import Loader from '../../components/Loader'
 
 const Categories = () => {
-  const { data: actionGames } = useGetActionGamesQuery()
-  const { data: fightGames } = useGetFightGamesQuery()
-  const { data: rpgGames } = useGetRpgGamesQuery()
-  const { data: simulationGames } = useGetSimulationGamesQuery()
-  const { data: sportGames } = useGetSportGamesQuery()
+  const { data: actionGames, isLoading: isLoadingAction } =
+    useGetActionGamesQuery()
+  const { data: fightGames, isLoading: isLoadingFight } =
+    useGetFightGamesQuery()
+  const { data: rpgGames, isLoading: isLoadingRPG } = useGetRpgGamesQuery()
+  const { data: simulationGames, isLoading: isLoadingSimulation } =
+    useGetSimulationGamesQuery()
+  const { data: sportGames, isLoading: isLoadingSport } =
+    useGetSportGamesQuery()
 
   if (actionGames && fightGames && rpgGames && simulationGames && sportGames) {
     return (
@@ -25,30 +30,40 @@ const Categories = () => {
           title="Ação"
           background="black"
           id="action"
+          isLoading={isLoadingAction}
         />
         <ProductsList
           games={sportGames}
           title="Esportes"
           background="gray"
           id="sports"
+          isLoading={isLoadingSport}
         />
         <ProductsList
           games={fightGames}
           title="Luta"
           background="black"
           id="fight"
+          isLoading={isLoadingFight}
         />
-        <ProductsList games={rpgGames} title="RPG" background="gray" id="rpg" />
+        <ProductsList
+          games={rpgGames}
+          title="RPG"
+          background="gray"
+          id="rpg"
+          isLoading={isLoadingRPG}
+        />
         <ProductsList
           games={simulationGames}
           title="Simulação"
           background="black"
           id="simulation"
+          isLoading={isLoadingSimulation}
         />
       </>
     )
   }
-  return <h4>Carregando...</h4>
+  return <Loader />
 }
 
 export default Categories
